@@ -52,7 +52,14 @@ public class SayHelloRecipe extends Recipe {
                 return classDecl;
             }
 
-            // TODO: Filter out classes that already have a `hello()` method
+            boolean helloMethodExists = classDecl.getBody().getStatements().stream()
+                    .filter(statement -> statement instanceof J.MethodDeclaration)
+                    .map(J.MethodDeclaration.class::cast)
+                    .anyMatch(methodDeclaration -> methodDeclaration.getName().getSimpleName().equals("hello"));
+
+            if (helloMethodExists) {
+                return classDecl;
+            }
 
             // TODO: Add a `hello()` method to classes that need it
             return classDecl;
