@@ -1,5 +1,6 @@
-package com.mycompany;
+package com.mycompany.app;
 
+import com.mycompany.app.SayHelloRecipe;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.test.RecipeSpec;
 import org.openrewrite.test.RewriteTest;
@@ -9,7 +10,7 @@ import static org.openrewrite.java.Assertions.java;
 class SayHelloRecipeTest implements RewriteTest {
     @Override
     public void defaults(RecipeSpec spec) {
-        spec.recipe(new SayHelloRecipe("com.yourorg.FooBar"));
+        spec.recipe( new SayHelloRecipe("com.mycompany.app.App") );
     }
 
     @Test
@@ -17,17 +18,17 @@ class SayHelloRecipeTest implements RewriteTest {
         rewriteRun(
                 java(
                         """
-                                    package com.yourorg;
+                                    package com.mycompany.app;
                                         
-                                    class FooBar {
+                                    class App {
                                     }
                                 """,
                         """
-                                    package com.yourorg;
+                                    package com.mycompany.app;
                                         
-                                    class FooBar {
+                                    class App {
                                         public String hello() {
-                                            return "Hello from com.yourorg.FooBar!";
+                                            return "Hello there from com.mycompany.app.App!!!!!";
                                         }
                                     }
                                 """
